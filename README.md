@@ -54,7 +54,7 @@ A piece that moves in other ways (i.e., a knight) will move similarly to the abo
 
 #### Capturing
 
-Captures are considered to be identical to moves, as the possible outcomes are the same: a capture if there is an enemy piece on the target square or in the path to it, an interruption if there is a friendly piece in the way, or a block otherwise. Thus the `x` specifier for capturing moves is completely unnecessary.
+Captures are considered to be identical to moves, as the possible outcomes are the same: a capture if there is an enemy piece on the target square or in the path to it, an interruption if there is a friendly piece in the way, or a block otherwise. Thus the `x` specifier for capturing moves is completely unnecessary and is ignored.
 
 Pawns that attempt a capture without a valid target present will result in no movement and the player's turn is forfeited.
 
@@ -76,7 +76,10 @@ If no piece can move to satisfy the move, then the player's turn is forfeited.
 
 Much like in regular chess, moves can be written to eliminate ambiguity in case there are multiple pieces that can perform that move. All moves can be written with any (ex. none, rank, file, or square) level of specificity, ex. `Qe1` can be written as `Qhe1`, `Q4e1`, or `Qh4e1`.
 
-Ambiguous moves that can be performed by multiple pieces are considered to be unfulfillable and the player's turn is forfeited.
+Ambiguous moves that can be performed by multiple pieces are resolved as follows:
+
+1. If only one piece can perform the move successfully (i.e., all other pieces are unable to perform the move), then that piece performs the move.
+2. If multiple pieces can perform the move successfully, the move is considered to be unfulfillable and the player's turn is forfeited, with exceptions covered in the next section.
 
 > Note: in combination with the rules on moving unexpected and nonexistent pieces, this rule adds strategic depth — specific moves may fail if the piece is not where expected, while ambiguous moves may result in unexpected pieces moving or a turn forfeit.
 
